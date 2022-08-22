@@ -1,0 +1,105 @@
+# --------------------------------------------------------------------------- #
+# The Toeplitz Project Expansions and Examples Library                        #
+# Copyright (c) 2011-2022 Toeplitz Project contributors                       #
+#                                                                             #
+# This Source Code Form is subject to the terms of the Mozilla Public         #
+# License, v. 2.0. If a copy of the MPL was not distributed with this         #
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.                    #
+# --------------------------------------------------------------------------- #
+
+from gh.toepproj.lit.H.ilbert.ZB.Thm117 import Pf
+
+
+anno eg1 on Pf.A8 @@@
+
+By means of the substitution $\zeta \mapsto \zeta^{g g'}$
+(performed only in the numerator), it is
+clear that $\frac{1 - \zeta}{1 - \zeta^g}$ must be equal to
+$1 + \zeta^g + \zeta^{2g} + \cdots + \zeta^{(g'-1)g}$, but we can
+examine this more thoroughly.
+
+We can bring the denominator $1 - \zeta^g$ to the other side
+of the equation, expand the product, and see that we indeed recover
+$1 - \zeta$:
+
+$$\begin{align}
+    (1 + \zeta^g + \zeta^{2g} + \cdots + \zeta^{(g'-1)g})(1 - \zeta^g)
+    & = 1 + \zeta^g + \zeta^{2g} + \cdots + \zeta^{(g'-1)g} \\
+    & \quad\quad - \zeta^g - \zeta^{2g} - \cdots - \zeta^{(g'-1)g} - \zeta^{g' g} \\
+    & = 1 - \zeta^{g' g} \\
+    & = 1 - \zeta.
+\end{align}$$
+
+Examples:
+
+<param:eg1_ell>[]{
+    ptype: "Prime",
+    name: "ell",
+    tex: "\ell",
+    default: 7,
+    args: {
+        odd: True,
+    },
+}
+
+<param:eg1_g>[]{
+    ptype: "Integer",
+    name: "g",
+    default: 3,
+    import: {
+        coprime_to: eg1_ell,
+    },
+    args: {
+        gt: 1,
+    },
+}
+
+<disp:eg1_disp1>[]{
+    import: {
+        ell: eg1_ell,
+        g: eg1_g,
+    },
+    build: '''
+gp = mod_inverse(g, ell)
+html = ''
+
+# Show the value of g'
+html += r"<p>$g' = %s$ is the inverse of $g$ mod $\ell$,</p>" % gp
+html += r"<p>so the exponent $(g' - 1)g$ is $(%s - 1)%s = %s$,</p>" % (gp, g, (gp-1)*g)
+html += r"<p>the left-hand factor has $g' = %s$ terms,</p>" % gp
+html += r"<p>in which the powers of $\zeta$ go up by $g = %s$ in each term,</p>" % g
+html += r"<p>and we get</p>"
+
+# Demonstrate algebra
+z = Symbol('zeta')
+line1_factor1 = " + ".join(latex(z**(g*a)) for a in range(gp))
+line1_factor2 = latex(1 - (z**g))
+line2_negterms = "-" + " - ".join(latex(z**(g*a)) for a in range(1, gp+1))
+line3 = latex(1 - (z**(g*gp)))
+
+q = (g*gp - 1)//ell
+c = '' if q == 1 else '-' if q == -1 else str(q)
+line4 = r'1 - \zeta^{%s\ell + 1}' % c
+
+line5 = latex(1 - z)
+
+eqns = rf"""
+<div>
+\begin{{align}}
+\left( {line1_factor1} \right)\left( {line1_factor2} \right)
+&= {line1_factor1} \\
+ & \quad\quad {line2_negterms} \\
+&= {line3} \\
+&= {line4} \\
+&= {line5}
+\end{{align}}
+</div>
+"""
+
+html += eqns
+
+return html
+''',
+}
+
+@@@

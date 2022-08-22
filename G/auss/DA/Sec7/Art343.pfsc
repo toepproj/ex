@@ -1,0 +1,138 @@
+# --------------------------------------------------------------------------- #
+# The Toeplitz Project Expansions and Examples Library                        #
+# Copyright (c) 2011-2022 Toeplitz Project contributors                       #
+#                                                                             #
+# This Source Code Form is subject to the terms of the Mozilla Public         #
+# License, v. 2.0. If a copy of the MPL was not distributed with this         #
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.                    #
+# --------------------------------------------------------------------------- #
+
+anno eg1 @@@
+
+# Periods
+
+In Article 343, Gauss introduces the _periods_ $(f, \lambda)$.
+He begins by demonstrating that the periods are independent of the choice
+of generator $g$.
+
+<param:eg_n>[]{
+    ptype: "Prime",
+    name: "n",
+    default: 19,
+    args: {
+      chooser_upper_bound: 100,
+    },
+}
+
+<param:eg_g>[]{
+    ptype: "PrimRes",
+    name: "g",
+    import: {
+        m: eg_n,
+    },
+    default: 2,
+}
+
+<param:eg_G>[]{
+    ptype: "PrimRes",
+    name: "G",
+    import: {
+        m: eg_n,
+    },
+    default: 10,
+}
+
+<param:eg_e>[]{
+    ptype: "Divisor",
+    name: "e",
+    import: {
+        n: eg_n,
+    },
+    args: {
+        dividing: "n - 1",
+    },
+    default: 3,
+}
+
+<param:eg_lam>[]{
+    ptype: "Integer",
+    name: "lam",
+    tex: "\lambda",
+    import: {
+        lt: eg_n,
+    },
+    args: {
+        gt: 0,
+    },
+    default: 1,
+}
+
+<disp:eg_disp1>[]{
+    import: {
+        n: eg_n,
+        g: eg_g,
+        G: eg_G,
+        e: eg_e,
+        lam: eg_lam
+    },
+    build: '''
+f = (n - 1) // e
+h = g**e % n
+H = G**e % n
+
+powers_of_h = [str(h**r % n) for r in range(f)]
+powers_of_H = [str(H**r % n) for r in range(f)]
+
+periods_g = [
+    ' + '.join([
+        f'r^{{{(lam * g**i * h**j) % n}}}'
+        for j in range(f)
+    ])
+    for i in range(e)
+]
+periods_G = [
+    ' + '.join([
+        f'r^{{{(lam * G**i * H**j) % n}}}'
+        for j in range(f)
+    ])
+    for i in range(e)
+]
+
+html = ''
+
+html += '<p>$f = \\frac{n - 1}{e} = %s$</p>\n' % f
+html += '<p>$h \\equiv g^e \\equiv %s$ mod $n$</p>\n' % h
+html += '<p>$H \\equiv G^e \\equiv %s$ mod $n$</p>\n' % H
+
+html += '$$\\begin{align}\n'
+html += '1, h, h^2, \\ldots, h^{f-1} & = ' + ', '.join(powers_of_h) + ' \\\\\n'
+html += '1, H, H^2, \\ldots, H^{f-1} & = ' + ', '.join(powers_of_H) + ' \\\\\n'
+html += '\\end{align}$$'
+
+html += '<p>Using $g$:</p>\n'
+html += '$$\\begin{align}\n'
+html += '\n'.join([
+    '(f, \\lambda%s) & = %s \\\\' % (
+        '' if i == 0 else ' g' if i == 1 else ' g^{%s}' % i,
+        periods_g[i]
+    )
+    for i in range(e)
+])
+html += '\\end{align}$$\n'
+
+html += '<p>Using $G$:</p>\n'
+html += '$$\\begin{align}\n'
+html += '\n'.join([
+    '(f, \\lambda%s) & = %s \\\\' % (
+        '' if i == 0 else ' G' if i == 1 else ' G^{%s}' % i,
+        periods_G[i]
+    )
+    for i in range(e)
+])
+html += '\\end{align}$$\n'
+
+return html
+'''
+}
+
+@@@

@@ -1,0 +1,91 @@
+# --------------------------------------------------------------------------- #
+# The Toeplitz Project Expansions and Examples Library                        #
+# Copyright (c) 2011-2022 Toeplitz Project contributors                       #
+#                                                                             #
+# This Source Code Form is subject to the terms of the Mozilla Public         #
+# License, v. 2.0. If a copy of the MPL was not distributed with this         #
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.                    #
+# --------------------------------------------------------------------------- #
+
+from gh.toepproj.lit.H.ilbert.ZB.Thm17 import Pf as ZB17Pf
+
+
+anno eg1 on ZB17Pf @@@
+# Investigating ZB17
+
+The theorem establishes that when we reduce the elements of
+an integral basis for our field $k$ mod a prime ideal $\mathfrak{p}$,
+there must be some maximal number $f \leq n$ of reduced elements that can
+form a linearly independent set mod $p$.
+
+But the proof is non-constructive, and we are left with no idea of
+_how_ this happens. In order to gain a more tangible understanding,
+it helps to examine what the reduced basis elements actually look like
+in a few cases.
+
+Let's begin by choosing a number field $k$, and take a look at an
+integral basis for $k$:
+
+<param:eg1_k>[]{
+    ptype: "NumberField",
+    name: "k",
+    default: "cyc(7)",
+    args: {
+        gen: "zeta",
+    },
+}
+
+<disp:eg1_disp1>[]{
+    import: {
+        k: eg1_k,
+    },
+    build: """
+B = k.integral_basis(fmt='alg')
+html = "An integral basis for $k$:\n\n"
+html += r"$\{" + ','.join([latex(b, order='old') for b in B]) + r"\}$"
+return html
+""",
+    export: ["B"],
+}
+
+Now let's choose the rational prime $p$, and then choose an ideal
+prime $frp@$ lying over $p$ in $k$:
+
+<param:eg1_p>[]{
+    ptype: "Prime",
+    context: "AlgNT",
+    name: "p",
+    default: 11,
+    args: {
+        chooser_upper_bound: 173
+    }
+}
+
+<param:eg1_frp>[]{
+    ptype: "PrimeIdeal",
+    name: "frp",
+    tex: "\mathfrak{p}",
+    import: {
+        k: eg1_k,
+        p: eg1_p,
+    },
+}
+
+Now we can see what the reduction looks like:
+
+<disp:eg1_disp2>[]{
+    import: {
+        frp: eg1_frp,
+        B: eg1_disp1,
+    },
+    build: """
+html = "Reducing the elements of the integral basis mod $\\mathfrak{p}$:\n\n"
+html += "$$\\begin{array}{rcl}\n"
+html += '\n'.join([
+    rf"{latex(b)} & \mapsto & {latex(frp.reduce_alg_num(b), order='old')} \\" for b in B
+])
+html += "\n\\end{array}$$\n"
+return html
+""",
+}
+@@@

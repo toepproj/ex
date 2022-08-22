@@ -1,0 +1,28 @@
+# --------------------------------------------------------------------------- #
+# The Toeplitz Project Expansions and Examples Library                        #
+# Copyright (c) 2011-2022 Toeplitz Project contributors                       #
+#                                                                             #
+# This Source Code Form is subject to the terms of the Mozilla Public         #
+# License, v. 2.0. If a copy of the MPL was not distributed with this         #
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.                    #
+# --------------------------------------------------------------------------- #
+
+import gh.toepproj.lit.H.ilbert.ZB.Lem18 as Lem18
+
+
+deduc X1 of Lem18.Pf.A40 {
+    rels R10 {
+        asrt A10 {
+            sy="$@1 - zetuur = 1 - qnt 1 - lam; sup r;$"
+        }
+        asrt A20 {
+            en="$@= 1 - bqnt 1 - r lam + A lam squ;$ for some $@A in bbZ[zet]$"
+        }
+        asrt A30 {
+            sy="$@equiv r lam mod lam squ$"
+        }
+    }
+    meson="
+    Lem18.Pf.A40 by R10 and Lem18.Pf.I10.
+    "
+}
