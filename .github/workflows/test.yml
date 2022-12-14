@@ -80,6 +80,8 @@ jobs:
       # Give the OCA a normal startup, so that it starts its internal Redis
       # server. Then we will use `docker exec` to run our build command inside
       # this container.
+      # Keeping a running container also allows us to first build dependencies,
+      # also with `docker exec`, with no need to mount `build` or `gdb` volumes.
       - name: Start pise
         run: |
           docker run --rm -d \
@@ -87,7 +89,7 @@ jobs:
             --mount 'type=volume,src=${{env.LIB_VOLUME}},dst=/proofscape/lib' \
             proofscape/pise:$PISE_TAG
       # -----------------------------------------
-      # Build dependencies
+      # Build dependencies (in topological order)
       - name: Build dependencies
         run: |
           docker exec \
