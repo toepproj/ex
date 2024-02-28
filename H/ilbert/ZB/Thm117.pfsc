@@ -36,7 +36,7 @@ Examples:
     ptype: "Prime",
     name: "ell",
     tex: "\ell",
-    default: 7,
+    init: 7,
     args: {
         odd: True,
     },
@@ -45,7 +45,7 @@ Examples:
 <param:eg1_g>[]{
     ptype: "Integer",
     name: "g",
-    default: 3,
+    init: 3,
     import: {
         coprime_to: eg1_ell,
     },

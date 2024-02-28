@@ -18,7 +18,7 @@ of generator $g$.
 <param:eg_n>[]{
     ptype: "Prime",
     name: "n",
-    default: 19,
+    init: 19,
     args: {
       chooser_upper_bound: 100,
     },
@@ -30,7 +30,7 @@ of generator $g$.
     import: {
         m: eg_n,
     },
-    default: 2,
+    init: 2,
 }
 
 <param:eg_G>[]{
@@ -39,7 +39,7 @@ of generator $g$.
     import: {
         m: eg_n,
     },
-    default: 10,
+    init: 10,
 }
 
 <param:eg_e>[]{
@@ -51,7 +51,7 @@ of generator $g$.
     args: {
         dividing: "n - 1",
     },
-    default: 3,
+    init: 3,
 }
 
 <param:eg_lam>[]{
@@ -64,7 +64,7 @@ of generator $g$.
     args: {
         gt: 0,
     },
-    default: 1,
+    init: 1,
 }
 
 <disp:eg_disp1>[]{
