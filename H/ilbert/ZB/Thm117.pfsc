@@ -34,7 +34,6 @@ Examples:
 
 <param:eg1_ell>[]{
     ptype: "Prime",
-    name: "ell",
     tex: "\ell",
     init: 7,
     args: {
@@ -44,10 +43,10 @@ Examples:
 
 <param:eg1_g>[]{
     ptype: "Integer",
-    name: "g",
+    tex: "g",
     init: 3,
     import: {
-        coprime_to: eg1_ell,
+        coprimeTo: eg1_ell,
     },
     args: {
         gt: 1,

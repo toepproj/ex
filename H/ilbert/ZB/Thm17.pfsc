@@ -28,7 +28,7 @@ integral basis for $k$:
 
 <param:eg1_k>[]{
     ptype: "NumberField",
-    name: "k",
+    tex: "k",
     init: "cyc(7)",
     args: {
         gen: "zeta",
@@ -54,16 +54,15 @@ prime $frp@$ lying over $p$ in $k$:
 <param:eg1_p>[]{
     ptype: "Prime",
     context: "AlgNT",
-    name: "p",
+    tex: "p",
     init: 11,
     args: {
-        chooser_upper_bound: 173
+        chooserUpperBound: 173
     }
 }
 
 <param:eg1_frp>[]{
     ptype: "PrimeIdeal",
-    name: "frp",
     tex: "\mathfrak{p}",
     import: {
         k: eg1_k,

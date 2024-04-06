@@ -17,16 +17,16 @@ of generator $g$.
 
 <param:eg_n>[]{
     ptype: "Prime",
-    name: "n",
+    tex: "n",
     init: 19,
     args: {
-      chooser_upper_bound: 100,
+      chooserUpperBound: 100,
     },
 }
 
 <param:eg_g>[]{
     ptype: "PrimRes",
-    name: "g",
+    tex: "g",
     import: {
         m: eg_n,
     },
@@ -35,7 +35,7 @@ of generator $g$.
 
 <param:eg_G>[]{
     ptype: "PrimRes",
-    name: "G",
+    tex: "G",
     import: {
         m: eg_n,
     },
@@ -44,7 +44,7 @@ of generator $g$.
 
 <param:eg_e>[]{
     ptype: "Divisor",
-    name: "e",
+    tex: "e",
     import: {
         n: eg_n,
     },
@@ -56,7 +56,6 @@ of generator $g$.
 
 <param:eg_lam>[]{
     ptype: "Integer",
-    name: "lam",
     tex: "\lambda",
     import: {
         lt: eg_n,
