@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------- #
 # The Toeplitz Project Expansions and Examples Library                        #
-# Copyright (c) 2011-2022 Toeplitz Project contributors                       #
+# Copyright (c) 2011-2024 Toeplitz Project contributors                       #
 #                                                                             #
 # This Source Code Form is subject to the terms of the Mozilla Public         #
 # License, v. 2.0. If a copy of the MPL was not distributed with this         #
@@ -17,46 +17,45 @@ of generator $g$.
 
 <param:eg_n>[]{
     ptype: "Prime",
-    name: "n",
-    default: 19,
+    tex: "n",
+    init: 19,
     args: {
-      chooser_upper_bound: 100,
+      chooserUpperBound: 100,
     },
 }
 
 <param:eg_g>[]{
     ptype: "PrimRes",
-    name: "g",
+    tex: "g",
     import: {
         m: eg_n,
     },
-    default: 2,
+    init: 2,
 }
 
 <param:eg_G>[]{
     ptype: "PrimRes",
-    name: "G",
+    tex: "G",
     import: {
         m: eg_n,
     },
-    default: 10,
+    init: 10,
 }
 
 <param:eg_e>[]{
     ptype: "Divisor",
-    name: "e",
+    tex: "e",
     import: {
         n: eg_n,
     },
     args: {
         dividing: "n - 1",
     },
-    default: 3,
+    init: 3,
 }
 
 <param:eg_lam>[]{
     ptype: "Integer",
-    name: "lam",
     tex: "\lambda",
     import: {
         lt: eg_n,
@@ -64,7 +63,7 @@ of generator $g$.
     args: {
         gt: 0,
     },
-    default: 1,
+    init: 1,
 }
 
 <disp:eg_disp1>[]{

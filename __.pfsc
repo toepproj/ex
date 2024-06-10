@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------- #
 # The Toeplitz Project Expansions and Examples Library                        #
-# Copyright (c) 2011-2022 Toeplitz Project contributors                       #
+# Copyright (c) 2011-2024 Toeplitz Project contributors                       #
 #                                                                             #
 # This Source Code Form is subject to the terms of the Mozilla Public         #
 # License, v. 2.0. If a copy of the MPL was not distributed with this         #
@@ -9,6 +9,6 @@
 
 version = "v0.23.1"
 
-dependencies = {
+deps = {
     "gh.toepproj.lit": "v0.23.1",
 }
